@@ -1,0 +1,74 @@
+ class Node { public:
+        Node*links[2]={NULL};
+        int cnt =0;
+        bool containskey(int ind){
+            return links[ind]!=NULL;
+        }
+        Node*get(int ind){
+            return links[ind];
+        }
+        void put(int ind,Node*node){
+            links[ind] = node;
+        }
+        void inc(){
+            cnt++;
+        }
+        void dec(){
+            cnt--;
+        }
+        int getcnt(){
+            return cnt;
+        }
+    };
+    class Trie {
+        private:
+        Node*root;
+        public:
+        Trie(){
+            root  = new Node();
+
+            }
+            void insert(int num){
+                Node*node  = root;
+                for(int i = 21;i>=0;i--){
+                    int bit = ((num>>i)&1);
+                    if(!node->containskey(bit)){
+                        node->put(bit,new Node());
+                    }
+                    node=node->get(bit);
+                    node->inc();
+                }
+            }
+            
+        
+int findMax(int num) {
+      Node * node = root;
+      int maxNum = 0;
+      for (int i = 21; i >= 0; i--) {
+        int bit = (num >> i) & 1;
+        if(node==NULL){
+            return maxNum;
+        }
+        if ( node -> containskey(!bit) && node->get(!bit)->getcnt()>0) {
+          maxNum = maxNum | (1 << i);
+          node = node -> get(!bit);
+        } else {
+          node = node -> get(bit);
+        }
+      }
+      return maxNum;
+    }
+    void er(int num){
+        Node*node  = root;
+                for(int i = 21;i>=0;i--){
+                    int bit = (num>>i)&1;
+                    if(!node->containskey(bit)){
+                        // node->dec();
+                        return;
+                        node->put(bit,new Node());
+                    }
+                    node=node->get(bit);
+                    node->dec();
+                }
+    }
+    };
