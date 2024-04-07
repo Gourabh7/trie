@@ -70,4 +70,7 @@ public:
 Node*next(Node*node,char ch){
         return node->get(ch);
     }
+bool ise(Node*node){
+        return node->isEnd();
+    }
 };
