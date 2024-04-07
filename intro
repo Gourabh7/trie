@@ -67,4 +67,7 @@ public:
 	}
 	Node*retroot(){
 		return root;}
+Node*next(Node*node,char ch){
+        return node->get(ch);
+    }
 };
